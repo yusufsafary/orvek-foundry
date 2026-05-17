@@ -1,6 +1,8 @@
 import { motion, type Variants } from "framer-motion";
 import { Link } from "wouter";
 import { Upload, Target, BarChart2, FileText, ChevronRight } from "lucide-react";
+import PublicNav from "@/components/public-nav";
+import PublicFooter from "@/components/public-footer";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -61,20 +63,12 @@ const STEPS = [
 export default function HowTo() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <nav className="border-b border-border bg-background/95 sticky top-0 z-50 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="font-semibold tracking-tight text-sm">Orvek Foundry</Link>
-          <div className="flex items-center gap-3">
-            <Link href="/auth" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Sign in</Link>
-            <Link href="/auth" className="text-sm bg-primary text-primary-foreground px-4 py-1.5 rounded hover:opacity-90 transition-opacity font-medium">Get access</Link>
-          </div>
-        </div>
-      </nav>
+      <PublicNav />
 
-      <section className="max-w-3xl mx-auto px-6 pt-20 pb-12">
+      <section className="max-w-3xl mx-auto px-6 pt-12 pb-8">
         <motion.div initial="hidden" animate="show" variants={stagger}>
-          <motion.p variants={fadeUp} className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-4">How it works</motion.p>
-          <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl font-bold tracking-tight leading-tight mb-6">
+          <motion.p variants={fadeUp} className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-3">How it works</motion.p>
+          <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl font-bold tracking-tight leading-tight mb-4">
             Four steps to clarity.
           </motion.h1>
           <motion.p variants={fadeUp} className="text-lg text-muted-foreground leading-relaxed">
@@ -83,25 +77,25 @@ export default function HowTo() {
         </motion.div>
       </section>
 
-      <section className="max-w-3xl mx-auto px-6 pb-20">
-        <motion.div initial="hidden" animate="show" variants={stagger} className="space-y-6">
+      <section className="max-w-3xl mx-auto px-6 pb-14">
+        <motion.div initial="hidden" animate="show" variants={stagger} className="space-y-5">
           {STEPS.map((s, i) => (
             <motion.div key={i} variants={fadeUp} className="border border-border rounded-xl bg-card overflow-hidden">
-              <div className="p-6 sm:p-8">
+              <div className="p-5 sm:p-6">
                 <div className="flex items-start gap-5">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
-                    <s.icon className="w-5 h-5 text-accent" />
+                  <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-accent/10 flex items-center justify-center">
+                    <s.icon className="w-4 h-4 text-accent" />
                   </div>
                   <div className="flex-1">
                     <p className="text-xs font-mono text-muted-foreground mb-1">{s.step}</p>
-                    <h2 className="text-xl font-bold tracking-tight mb-3">{s.title}</h2>
-                    <p className="text-muted-foreground leading-relaxed mb-6">{s.detail}</p>
-                    <div className="space-y-2">
-                      <p className="text-xs font-medium text-foreground uppercase tracking-widest mb-3">Tips</p>
+                    <h2 className="text-lg font-bold tracking-tight mb-2">{s.title}</h2>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-4">{s.detail}</p>
+                    <div className="space-y-1.5">
+                      <p className="text-xs font-medium text-foreground uppercase tracking-widest mb-2">Tips</p>
                       {s.tips.map((tip, j) => (
-                        <div key={j} className="flex items-start gap-2.5">
-                          <ChevronRight className="w-3.5 h-3.5 text-accent mt-0.5 flex-shrink-0" />
-                          <span className="text-sm text-muted-foreground">{tip}</span>
+                        <div key={j} className="flex items-start gap-2">
+                          <ChevronRight className="w-3 h-3 text-accent mt-0.5 flex-shrink-0" />
+                          <span className="text-xs text-muted-foreground">{tip}</span>
                         </div>
                       ))}
                     </div>
@@ -114,10 +108,10 @@ export default function HowTo() {
       </section>
 
       <section className="border-t border-border bg-muted/20">
-        <div className="max-w-3xl mx-auto px-6 py-12 text-center">
+        <div className="max-w-3xl mx-auto px-6 py-10 text-center">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}>
-            <motion.h2 variants={fadeUp} className="text-2xl font-bold tracking-tight mb-4">Ready to start?</motion.h2>
-            <motion.p variants={fadeUp} className="text-muted-foreground mb-6 text-sm">Setup takes under five minutes. Your first match score in ten.</motion.p>
+            <motion.h2 variants={fadeUp} className="text-2xl font-bold tracking-tight mb-3">Ready to start?</motion.h2>
+            <motion.p variants={fadeUp} className="text-muted-foreground mb-5 text-sm">Setup takes under five minutes. Your first match score in ten.</motion.p>
             <motion.div variants={fadeUp}>
               <Link href="/auth" className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded font-semibold hover:opacity-90 transition-opacity text-sm">
                 Get started
@@ -127,17 +121,7 @@ export default function HowTo() {
         </div>
       </section>
 
-      <footer className="border-t border-border">
-        <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span className="text-sm text-muted-foreground">Orvek Foundry</span>
-          <div className="flex items-center gap-6 text-xs text-muted-foreground">
-            <Link href="/about" className="hover:text-foreground transition-colors">About</Link>
-            <Link href="/how-to" className="hover:text-foreground transition-colors">How it works</Link>
-            <Link href="/legal" className="hover:text-foreground transition-colors">Legal</Link>
-            <Link href="/cookies" className="hover:text-foreground transition-colors">Cookies</Link>
-          </div>
-        </div>
-      </footer>
+      <PublicFooter />
     </div>
   );
 }
