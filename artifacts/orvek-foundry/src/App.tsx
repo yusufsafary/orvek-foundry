@@ -11,6 +11,10 @@ import Dashboard from "@/pages/dashboard";
 import JobDetail from "@/pages/job-detail";
 import ResumeAI from "@/pages/resume-ai";
 import Settings from "@/pages/settings";
+import About from "@/pages/about";
+import HowTo from "@/pages/how-to";
+import Legal from "@/pages/legal";
+import Cookies from "@/pages/cookies";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient({
@@ -33,6 +37,10 @@ function Router() {
     <Switch>
       <Route path="/" component={Landing} />
       <Route path="/auth" component={Auth} />
+      <Route path="/about" component={About} />
+      <Route path="/how-to" component={HowTo} />
+      <Route path="/legal" component={Legal} />
+      <Route path="/cookies" component={Cookies} />
       <Route path="/onboarding">
         {() => <ProtectedRoute component={Onboarding} />}
       </Route>
