@@ -6,6 +6,9 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export interface HealthStatus {
-  status: string;
+export interface DashboardStats {
+  totalJobs: number;
+  avgScore: number;
+  topScore: number;
+  appliedCount: number;
 }

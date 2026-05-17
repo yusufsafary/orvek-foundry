@@ -1,0 +1,5 @@
+{
+  "buildCommand": "pnpm install && pnpm --filter @workspace/orvek-foundry run build",
+  "outputDirectory": "artifacts/orvek-foundry/dist",
+  "installCommand": "pnpm install --frozen-lockfile"
+}
