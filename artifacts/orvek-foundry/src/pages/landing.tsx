@@ -305,9 +305,14 @@ export default function Landing() {
       </section>
 
       <footer className="border-t border-border">
-        <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
-          <span className="text-sm text-muted-foreground">Orvek Foundry</span>
-          <span className="text-xs text-muted-foreground">Move with signal, not noise.</span>
+        <div className="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <span className="text-sm text-muted-foreground font-medium">Orvek Foundry</span>
+          <div className="flex items-center gap-6 text-xs text-muted-foreground">
+            <Link href="/about" className="hover:text-foreground transition-colors">About</Link>
+            <Link href="/how-to" className="hover:text-foreground transition-colors">How it works</Link>
+            <Link href="/legal" className="hover:text-foreground transition-colors">Legal</Link>
+            <Link href="/cookies" className="hover:text-foreground transition-colors">Cookies</Link>
+          </div>
         </div>
       </footer>
     </div>
