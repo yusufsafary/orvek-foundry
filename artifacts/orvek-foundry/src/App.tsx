@@ -15,15 +15,17 @@ import About from "@/pages/about";
 import HowTo from "@/pages/how-to";
 import Legal from "@/pages/legal";
 import Cookies from "@/pages/cookies";
+import Blog from "@/pages/blog";
+import Careers from "@/pages/careers";
+import Help from "@/pages/help";
+import Changelog from "@/pages/changelog";
+import Press from "@/pages/press";
+import Security from "@/pages/security";
+import Contact from "@/pages/contact";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 1,
-      staleTime: 1000 * 60,
-    },
-  },
+  defaultOptions: { queries: { retry: 1, staleTime: 1000 * 60 } },
 });
 
 function ProtectedRoute({ component: Component }: { component: () => React.ReactElement | null }) {
@@ -41,21 +43,18 @@ function Router() {
       <Route path="/how-to" component={HowTo} />
       <Route path="/legal" component={Legal} />
       <Route path="/cookies" component={Cookies} />
-      <Route path="/onboarding">
-        {() => <ProtectedRoute component={Onboarding} />}
-      </Route>
-      <Route path="/dashboard">
-        {() => <ProtectedRoute component={Dashboard} />}
-      </Route>
-      <Route path="/job/:id">
-        {() => <ProtectedRoute component={JobDetail} />}
-      </Route>
-      <Route path="/resume">
-        {() => <ProtectedRoute component={ResumeAI} />}
-      </Route>
-      <Route path="/settings">
-        {() => <ProtectedRoute component={Settings} />}
-      </Route>
+      <Route path="/blog" component={Blog} />
+      <Route path="/careers" component={Careers} />
+      <Route path="/help" component={Help} />
+      <Route path="/changelog" component={Changelog} />
+      <Route path="/press" component={Press} />
+      <Route path="/security" component={Security} />
+      <Route path="/contact" component={Contact} />
+      <Route path="/onboarding">{() => <ProtectedRoute component={Onboarding} />}</Route>
+      <Route path="/dashboard">{() => <ProtectedRoute component={Dashboard} />}</Route>
+      <Route path="/job/:id">{() => <ProtectedRoute component={JobDetail} />}</Route>
+      <Route path="/resume">{() => <ProtectedRoute component={ResumeAI} />}</Route>
+      <Route path="/settings">{() => <ProtectedRoute component={Settings} />}</Route>
       <Route component={NotFound} />
     </Switch>
   );
