@@ -1,5 +1,6 @@
 import { motion, type Variants } from "framer-motion";
-import { Link } from "wouter";
+import PublicNav from "@/components/public-nav";
+import PublicFooter from "@/components/public-footer";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 16 },
@@ -12,9 +13,9 @@ const stagger: Variants = {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <motion.div variants={fadeUp} className="mb-10">
-      <h2 className="text-lg font-semibold tracking-tight mb-3">{title}</h2>
-      <div className="text-sm text-muted-foreground leading-relaxed space-y-3">{children}</div>
+    <motion.div variants={fadeUp} className="mb-8">
+      <h2 className="text-base font-semibold tracking-tight mb-2">{title}</h2>
+      <div className="text-sm text-muted-foreground leading-relaxed space-y-2">{children}</div>
     </motion.div>
   );
 }
@@ -23,29 +24,21 @@ export default function Legal() {
   const updated = "May 17, 2026";
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <nav className="border-b border-border bg-background/95 sticky top-0 z-50 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <Link href="/" className="font-semibold tracking-tight text-sm">Orvek Foundry</Link>
-          <div className="flex items-center gap-3">
-            <Link href="/auth" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Sign in</Link>
-            <Link href="/auth" className="text-sm bg-primary text-primary-foreground px-4 py-1.5 rounded hover:opacity-90 transition-opacity font-medium">Get access</Link>
-          </div>
-        </div>
-      </nav>
+      <PublicNav />
 
-      <section className="max-w-2xl mx-auto px-6 pt-20 pb-4">
+      <section className="max-w-2xl mx-auto px-6 pt-12 pb-4">
         <motion.div initial="hidden" animate="show" variants={stagger}>
-          <motion.p variants={fadeUp} className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-4">Legal</motion.p>
+          <motion.p variants={fadeUp} className="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-3">Legal</motion.p>
           <motion.h1 variants={fadeUp} className="text-3xl font-bold tracking-tight mb-2">Terms of Service &amp; Privacy Policy</motion.h1>
-          <motion.p variants={fadeUp} className="text-xs text-muted-foreground mb-12">Last updated: {updated}</motion.p>
+          <motion.p variants={fadeUp} className="text-xs text-muted-foreground mb-8">Last updated: {updated}</motion.p>
         </motion.div>
       </section>
 
-      <section className="max-w-2xl mx-auto px-6 pb-20">
+      <section className="max-w-2xl mx-auto px-6 pb-16">
         <motion.div initial="hidden" animate="show" variants={stagger}>
 
-          <motion.div variants={fadeUp} className="mb-10">
-            <h2 className="text-base font-bold tracking-tight text-accent mb-1 uppercase text-xs tracking-widest">Terms of Service</h2>
+          <motion.div variants={fadeUp} className="mb-6">
+            <p className="text-xs font-bold tracking-widest text-accent uppercase">Terms of Service</p>
           </motion.div>
 
           <Section title="1. Acceptance of terms">
@@ -80,10 +73,10 @@ export default function Legal() {
             <p>We may update these Terms at any time. Continued use of the Service after changes constitutes acceptance. We will notify active users of material changes via email or in-app notice.</p>
           </Section>
 
-          <div className="border-t border-border my-10" />
+          <div className="border-t border-border my-8" />
 
-          <motion.div variants={fadeUp} className="mb-10">
-            <h2 className="text-base font-bold tracking-tight text-accent mb-1 uppercase text-xs tracking-widest">Privacy Policy</h2>
+          <motion.div variants={fadeUp} className="mb-6">
+            <p className="text-xs font-bold tracking-widest text-accent uppercase">Privacy Policy</p>
           </motion.div>
 
           <Section title="9. Data we collect">
@@ -113,17 +106,7 @@ export default function Legal() {
         </motion.div>
       </section>
 
-      <footer className="border-t border-border">
-        <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span className="text-sm text-muted-foreground">Orvek Foundry</span>
-          <div className="flex items-center gap-6 text-xs text-muted-foreground">
-            <Link href="/about" className="hover:text-foreground transition-colors">About</Link>
-            <Link href="/how-to" className="hover:text-foreground transition-colors">How it works</Link>
-            <Link href="/legal" className="hover:text-foreground transition-colors">Legal</Link>
-            <Link href="/cookies" className="hover:text-foreground transition-colors">Cookies</Link>
-          </div>
-        </div>
-      </footer>
+      <PublicFooter />
     </div>
   );
 }
