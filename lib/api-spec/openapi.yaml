@@ -1,22 +1,31 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Orvek Foundry API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: auth
+    description: Authentication
+  - name: jobs
+    description: Job listings and matching
+  - name: profile
+    description: User profile
+  - name: resume
+    description: Resume AI tailoring
+  - name: dashboard
+    description: Dashboard aggregates
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +33,211 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      summary: Login with email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthCredentials"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResult"
+        "401":
+          description: Invalid credentials
+
+  /auth/register:
+    post:
+      operationId: register
+      tags: [auth]
+      summary: Register with email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthCredentials"
+      responses:
+        "201":
+          description: Registration successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResult"
+
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [auth]
+      summary: Logout
+      responses:
+        "200":
+          description: Logged out
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+
+  /profile:
+    get:
+      operationId: getProfile
+      tags: [profile]
+      summary: Get user profile
+      responses:
+        "200":
+          description: Profile data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Profile"
+    put:
+      operationId: updateProfile
+      tags: [profile]
+      summary: Update user profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProfileInput"
+      responses:
+        "200":
+          description: Updated profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Profile"
+
+  /jobs:
+    get:
+      operationId: listJobs
+      tags: [jobs]
+      summary: List all jobs with match scores
+      parameters:
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: level
+          in: query
+          schema:
+            type: string
+        - name: minScore
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Job list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Job"
+
+  /jobs/{id}:
+    get:
+      operationId: getJob
+      tags: [jobs]
+      summary: Get job detail
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Job detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobDetail"
+        "404":
+          description: Not found
+
+  /jobs/{id}/match:
+    post:
+      operationId: matchJob
+      tags: [jobs]
+      summary: Generate AI match score for a job
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MatchRequest"
+      responses:
+        "200":
+          description: Match result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MatchResult"
+
+  /resume/tailor:
+    post:
+      operationId: tailorResume
+      tags: [resume]
+      summary: AI-tailor resume for a job description
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TailorRequest"
+      responses:
+        "200":
+          description: Tailored resume
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TailorResult"
+
+  /dashboard/stats:
+    get:
+      operationId: getDashboardStats
+      tags: [dashboard]
+      summary: Get dashboard summary stats
+      responses:
+        "200":
+          description: Dashboard stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardStats"
+
+  /dashboard/activity:
+    get:
+      operationId: getRecentActivity
+      tags: [dashboard]
+      summary: Get recent activity feed
+      responses:
+        "200":
+          description: Recent activity
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ActivityItem"
+
 components:
   schemas:
     HealthStatus:
@@ -31,6 +245,189 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
+    MessageResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required: [message]
+
+    AuthCredentials:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+
+    AuthResult:
+      type: object
+      required: [token, user]
+      properties:
+        token:
+          type: string
+        user:
+          $ref: "#/components/schemas/User"
+
+    User:
+      type: object
+      required: [id, email]
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+
+    Profile:
+      type: object
+      required: [userId, targetRole, experienceLevel]
+      properties:
+        userId:
+          type: string
+        resumeText:
+          type: ["string", "null"]
+        targetRole:
+          type: string
+        experienceLevel:
+          type: string
+
+    ProfileInput:
+      type: object
+      properties:
+        resumeText:
+          type: string
+        targetRole:
+          type: string
+        experienceLevel:
+          type: string
+
+    Job:
+      type: object
+      required: [id, title, company, level, score, reasoning, location, type]
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        company:
+          type: string
+        level:
+          type: string
+        location:
+          type: string
+        type:
+          type: string
+        score:
+          type: integer
+        reasoning:
+          type: string
+        postedAt:
+          type: string
+
+    JobDetail:
+      type: object
+      required: [id, title, company, level, score, reasoning, location, type, description, requirements, benefits]
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        company:
+          type: string
+        level:
+          type: string
+        location:
+          type: string
+        type:
+          type: string
+        score:
+          type: integer
+        reasoning:
+          type: string
+        description:
+          type: string
+        requirements:
+          type: array
+          items:
+            type: string
+        benefits:
+          type: array
+          items:
+            type: string
+        postedAt:
+          type: string
+
+    MatchRequest:
+      type: object
+      required: [resumeText]
+      properties:
+        resumeText:
+          type: string
+
+    MatchResult:
+      type: object
+      required: [score, reasoning, strengths, gaps]
+      properties:
+        score:
+          type: integer
+        reasoning:
+          type: string
+        strengths:
+          type: array
+          items:
+            type: string
+        gaps:
+          type: array
+          items:
+            type: string
+
+    TailorRequest:
+      type: object
+      required: [resumeText, jobDescription]
+      properties:
+        resumeText:
+          type: string
+        jobDescription:
+          type: string
+
+    TailorResult:
+      type: object
+      required: [original, tailored, changes]
+      properties:
+        original:
+          type: string
+        tailored:
+          type: string
+        changes:
+          type: array
+          items:
+            type: string
+
+    DashboardStats:
+      type: object
+      required: [totalJobs, avgScore, topScore, appliedCount]
+      properties:
+        totalJobs:
+          type: integer
+        avgScore:
+          type: integer
+        topScore:
+          type: integer
+        appliedCount:
+          type: integer
+
+    ActivityItem:
+      type: object
+      required: [id, type, label, timestamp]
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        label:
+          type: string
+        timestamp:
+          type: string
