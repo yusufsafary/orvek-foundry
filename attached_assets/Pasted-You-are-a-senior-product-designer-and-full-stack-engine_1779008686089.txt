@@ -1,0 +1,250 @@
+You are a senior product designer and full-stack engineer.
+
+Build a production-ready web application called "Orvek Foundry".
+
+This is not a generic AI SaaS. This must feel like a refined, editorial-grade product with strong design intention, sharp UX writing, and believable AI functionality.
+
+Avoid generic layouts, avoid template SaaS patterns, avoid overused copywriting.
+
+--------------------------------------------------
+CORE PRODUCT IDEA
+--------------------------------------------------
+
+Orvek Foundry is an intelligent career system.
+
+It does not help users “find jobs”.
+It helps them stop applying blindly and move with precision.
+
+The product should feel like a decision engine, not a job board.
+
+--------------------------------------------------
+TECH STACK (MANDATORY)
+--------------------------------------------------
+
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS (custom styling, no default look)
+- Framer Motion (subtle animations only)
+- Supabase (Auth, Database, Storage)
+- OpenAI API (real usage, not mock)
+- Deployment: Vercel
+- Version control: GitHub
+
+--------------------------------------------------
+ENVIRONMENT VARIABLES
+--------------------------------------------------
+
+Use environment variables:
+
+- OPENAI_API_KEY
+- NEXT_PUBLIC_SUPABASE_URL
+- NEXT_PUBLIC_SUPABASE_ANON_KEY
+- GITHUB_TOKEN
+- VERCEL_TOKEN
+
+--------------------------------------------------
+PAGES (ALL MUST WORK)
+--------------------------------------------------
+
+1. Landing Page "/"
+2. Auth Page "/auth"
+3. Onboarding "/onboarding"
+4. Dashboard "/dashboard"
+5. Job Detail "/job/[id]"
+6. Resume AI "/resume"
+7. Settings "/settings"
+
+All pages must be mobile-first and fully responsive.
+
+--------------------------------------------------
+DESIGN DIRECTION (CRITICAL)
+--------------------------------------------------
+
+Style: Editorial Tech Minimal
+
+- Clean but not boring
+- Strong typography hierarchy
+- Generous whitespace
+- No visual clutter
+- No gradient overload
+- No generic UI kits
+
+Colors:
+- Background: soft off-white or muted tone
+- Primary: near-black
+- Accent: subtle green or neutral tone
+
+Typography:
+- Headlines: bold, tight spacing
+- Body: clean, readable
+- Buttons: confident, minimal
+
+--------------------------------------------------
+UX WRITING (VERY IMPORTANT)
+--------------------------------------------------
+
+Do NOT use generic phrases like:
+- “Find your dream job”
+- “Unlock your potential”
+
+Use sharp, intentional copy like:
+- “Stop applying blindly”
+- “Move with signal, not noise”
+- “Every role scored. Every move deliberate.”
+
+No em dashes anywhere.
+
+--------------------------------------------------
+CORE FEATURES
+--------------------------------------------------
+
+AUTH
+- Supabase email login
+- Persistent session
+
+ONBOARDING
+- Upload resume (PDF or text)
+- Input target role
+- Select experience level
+
+DASHBOARD
+- Display job list (seed with realistic mock data)
+- Each job shows:
+  - Title
+  - Company
+  - Match score (AI generated)
+  - Short reasoning
+
+JOB DETAIL
+- Full job description
+- AI match breakdown
+- “Apply” button (simulate action)
+
+RESUME AI
+- Input: resume + job description
+- Output: rewritten resume (via OpenAI)
+- Show before vs after
+
+--------------------------------------------------
+AI IMPLEMENTATION (REAL)
+--------------------------------------------------
+
+1. MATCH SCORE
+
+Send to OpenAI:
+- user resume
+- job description
+
+Return:
+- score (0–100)
+- reasoning (short, precise)
+
+2. RESUME TAILORING
+
+Send:
+- original resume
+- job description
+
+Return:
+- improved version
+- more ATS-friendly
+
+Keep responses structured.
+
+--------------------------------------------------
+DATABASE (SUPABASE)
+--------------------------------------------------
+
+Tables:
+
+users
+- id
+- email
+
+profiles
+- user_id
+- resume_text
+- target_role
+
+jobs
+- id
+- title
+- company
+- description
+
+matches
+- user_id
+- job_id
+- score
+- reasoning
+
+--------------------------------------------------
+ANIMATION
+--------------------------------------------------
+
+Use Framer Motion carefully:
+
+- Fade in sections
+- Subtle hover effects
+- No excessive motion
+
+--------------------------------------------------
+LOADING STATES
+--------------------------------------------------
+
+- Skeleton loaders for job list
+- Smooth transitions
+- No abrupt rendering
+
+--------------------------------------------------
+GITHUB AUTOMATION
+--------------------------------------------------
+
+Initialize git repository.
+
+Use GITHUB_TOKEN to:
+- Create repo (if not exists)
+- Push code
+
+--------------------------------------------------
+VERCEL DEPLOYMENT
+--------------------------------------------------
+
+Use VERCEL_TOKEN to:
+
+- Link project
+- Deploy automatically
+
+Ensure environment variables are set.
+
+--------------------------------------------------
+PROJECT STRUCTURE
+--------------------------------------------------
+
+/app
+/components
+/lib
+/api
+/styles
+/hooks
+
+Keep code clean and modular.
+
+--------------------------------------------------
+FINAL REQUIREMENTS
+--------------------------------------------------
+
+- No placeholder UI
+- No broken routes
+- No fake buttons
+- All flows must work logically
+- Mobile experience must feel native
+- The product should feel like a real startup, not a demo
+
+--------------------------------------------------
+OUTPUT
+--------------------------------------------------
+
+Generate the full project code, ready to run in Replit.
+
+Ensure it can be pushed to GitHub and deployed to Vercel without modification.
