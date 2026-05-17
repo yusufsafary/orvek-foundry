@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { LayoutDashboard, FileText, Settings, LogOut } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 import { useLogout } from "@workspace/api-client-react";
+import { LogoMark } from "@/components/public-nav";
 
 const NAV_ITEMS = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -18,29 +19,19 @@ export default function AppShell({ children }: { children: ReactNode }) {
 
   const handleLogout = () => {
     logoutMutation.mutate(undefined, {
-      onSuccess: () => {
-        logout();
-        setLocation("/");
-      },
-      onError: () => {
-        logout();
-        setLocation("/");
-      },
+      onSuccess: () => { logout(); setLocation("/"); },
+      onError: () => { logout(); setLocation("/"); },
     });
   };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* Top nav */}
       <nav className="border-b border-border bg-background/95 sticky top-0 z-50 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           <div className="flex items-center gap-6">
-            <Link
-              href="/dashboard"
-              className="font-semibold tracking-tight text-sm"
-              data-testid="link-logo"
-            >
-              Orvek Foundry
+            <Link href="/dashboard" className="flex items-center gap-2 text-accent hover:opacity-80 transition-opacity" data-testid="link-logo">
+              <LogoMark size={18} />
+              <span className="font-semibold tracking-tight text-sm text-foreground">Orvek Foundry</span>
             </Link>
             <div className="hidden sm:flex items-center gap-1">
               {NAV_ITEMS.map((item) => {
@@ -50,9 +41,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
                     key={item.href}
                     href={item.href}
                     className={`flex items-center gap-1.5 px-3 py-1.5 rounded text-sm transition-colors ${
-                      active
-                        ? "bg-muted text-foreground font-medium"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                      active ? "bg-muted text-foreground font-medium" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                     }`}
                     data-testid={`link-nav-${item.label.toLowerCase().replace(" ", "-")}`}
                   >
@@ -72,8 +61,6 @@ export default function AppShell({ children }: { children: ReactNode }) {
             <span className="hidden sm:block">Sign out</span>
           </button>
         </div>
-
-        {/* Mobile nav */}
         <div className="sm:hidden flex border-t border-border">
           {NAV_ITEMS.map((item) => {
             const active = location === item.href;
@@ -81,9 +68,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex-1 flex flex-col items-center gap-1 py-2 text-xs transition-colors ${
-                  active ? "text-foreground font-medium" : "text-muted-foreground"
-                }`}
+                className={`flex-1 flex flex-col items-center gap-1 py-2 text-xs transition-colors ${active ? "text-foreground font-medium" : "text-muted-foreground"}`}
                 data-testid={`link-mobile-${item.label.toLowerCase().replace(" ", "-")}`}
               >
                 <item.icon className="w-4 h-4" />
@@ -93,14 +78,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
           })}
         </div>
       </nav>
-
-      {/* Page content */}
-      <motion.main
-        className="flex-1"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-      >
+      <motion.main className="flex-1" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}>
         {children}
       </motion.main>
     </div>
