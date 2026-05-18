@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { motion, type Variants } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, CheckCircle2, TrendingUp, Target, FileText, Zap } from "lucide-react";
@@ -38,6 +39,43 @@ function ScoreBadge({ score }: { score: number }) {
   );
 }
 
+function TwitterFollowCard() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const render = () => {
+      if (ref.current && (window as any).twttr?.widgets) {
+        (window as any).twttr.widgets.load(ref.current);
+      }
+    };
+    if ((window as any).twttr?.widgets) {
+      render();
+    } else {
+      const interval = setInterval(() => {
+        if ((window as any).twttr?.widgets) {
+          render();
+          clearInterval(interval);
+        }
+      }, 200);
+      return () => clearInterval(interval);
+    }
+  }, []);
+
+  return (
+    <div ref={ref} className="mb-5">
+      <a
+        href="https://twitter.com/orvekfoundry?ref_src=twsrc%5Etfw"
+        className="twitter-follow-button"
+        data-show-count="true"
+        data-size="large"
+        data-dnt="true"
+      >
+        Follow @orvekfoundry
+      </a>
+    </div>
+  );
+}
+
 export default function Landing() {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -46,11 +84,8 @@ export default function Landing() {
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-6 pt-16 pb-14">
         <motion.div initial="hidden" animate="show" variants={stagger}>
-          <motion.div variants={fadeUp} className="mb-5">
-            <span className="inline-flex items-center gap-2 text-xs font-medium text-accent border border-accent/30 bg-accent/5 px-3 py-1 rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-              Intelligent Career System
-            </span>
+          <motion.div variants={fadeUp}>
+            <TwitterFollowCard />
           </motion.div>
           <motion.h1 variants={fadeUp} className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] mb-5 max-w-4xl">
             Stop applying<br /><span className="text-accent">blindly.</span>
