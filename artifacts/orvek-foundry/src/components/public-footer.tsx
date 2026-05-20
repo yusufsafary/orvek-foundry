@@ -43,14 +43,14 @@ export default function PublicFooter() {
             <Link href="/" className="font-semibold tracking-tight text-sm text-foreground block mb-2">Orvek Foundry</Link>
             <p className="text-xs text-muted-foreground leading-relaxed max-w-xs">Move with signal, not noise. The intelligent career system for engineers and product leaders.</p>
             <a
-              href="https://x.com/orvekfoundry"
+              href="https://x.com/ovrefoundry"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 mt-4 text-xs text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Follow @orvekfoundry on X"
+              aria-label="Follow @ovrefoundry on X"
             >
               <XIcon size={13} />
-              <span>@orvekfoundry</span>
+              <span>@ovrefoundry</span>
             </a>
           </div>
           {Object.entries(FOOTER_LINKS).map(([group, links]) => (
@@ -72,14 +72,14 @@ export default function PublicFooter() {
           <span className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} Orvek Foundry. All rights reserved.</span>
           <div className="flex items-center gap-4">
             <a
-              href="https://x.com/orvekfoundry"
+              href="https://x.com/ovrefoundry"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Follow @orvekfoundry on X"
+              aria-label="Follow @ovrefoundry on X"
             >
               <XIcon size={12} />
-              <span>@orvekfoundry</span>
+              <span>@ovrefoundry</span>
             </a>
             <span className="text-xs text-muted-foreground">Built for people who treat their career like a product.</span>
           </div>
