@@ -37,12 +37,12 @@ export default function PublicNav() {
           <LogoMark size={20} />
           <span className="font-semibold tracking-tight text-sm text-foreground">Orvek Foundry</span>
         </Link>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-1">
           <a
             href="https://x.com/ovrefoundry"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground transition-colors"
+            className="p-2 text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-muted"
             aria-label="Follow @ovrefoundry on X"
           >
             <XIcon size={16} />
@@ -51,13 +51,14 @@ export default function PublicNav() {
             href="https://t.me/ovrekfoundry"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-foreground transition-colors"
+            className="p-2 text-muted-foreground hover:text-foreground transition-colors rounded-md hover:bg-muted"
             aria-label="Join Telegram channel"
           >
             <TelegramIcon size={16} />
           </a>
-          <Link href="/auth" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Sign in</Link>
-          <Link href="/auth" className="text-sm bg-primary text-primary-foreground px-4 py-1.5 rounded hover:opacity-90 transition-opacity font-medium">Get access</Link>
+          <div className="w-px h-4 bg-border mx-2" />
+          <Link href="/auth" className="text-sm text-muted-foreground hover:text-foreground transition-colors px-2">Sign in</Link>
+          <Link href="/auth" className="text-sm bg-primary text-primary-foreground px-4 py-1.5 rounded hover:opacity-90 transition-opacity font-medium ml-1">Get access</Link>
         </div>
       </div>
     </nav>
