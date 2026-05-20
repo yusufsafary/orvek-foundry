@@ -64,13 +64,13 @@ function TwitterFollowCard() {
   return (
     <div ref={ref} className="mb-5">
       <a
-        href="https://twitter.com/orvekfoundry?ref_src=twsrc%5Etfw"
+        href="https://x.com/ovrefoundry"
         className="twitter-follow-button"
         data-show-count="true"
         data-size="large"
         data-dnt="true"
       >
-        Follow @orvekfoundry
+        Follow @ovrefoundry
       </a>
     </div>
   );
