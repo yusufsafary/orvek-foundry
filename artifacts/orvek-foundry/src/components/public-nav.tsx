@@ -31,11 +31,11 @@ export default function PublicNav() {
         </Link>
         <div className="flex items-center gap-3">
           <a
-            href="https://x.com/orvekfoundry"
+            href="https://x.com/ovrefoundry"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="Follow @orvekfoundry on X"
+            aria-label="Follow @ovrefoundry on X"
           >
             <XIcon size={16} />
           </a>
