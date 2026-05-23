@@ -90,7 +90,20 @@ export default function PublicFooter() {
         </div>
         <div className="border-t border-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
           <span className="text-xs text-muted-foreground">&copy; {new Date().getFullYear()} Orvek Foundry. All rights reserved.</span>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap justify-center sm:justify-end">
+            <a
+              href="https://orynth.dev/projects/orvek-foundry"
+              target="_blank"
+              rel="noopener"
+            >
+              <img
+                src="https://orynth.dev/api/badge/orvek-foundry?theme=light&style=default"
+                alt="Featured on Orynth"
+                width="130"
+                height="40"
+                style={{ display: "block" }}
+              />
+            </a>
             <a
               href="https://x.com/ovrefoundry"
               target="_blank"
@@ -118,3 +131,4 @@ export default function PublicFooter() {
     </footer>
   );
 }
+
